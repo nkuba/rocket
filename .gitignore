@@ -4,9 +4,6 @@
 *.iml
 out
 gen
-.gitignore
-.idea/
-rocket.iml
 
 ### Java
 # Compiled class file
