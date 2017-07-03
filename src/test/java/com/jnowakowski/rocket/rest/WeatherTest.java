@@ -1,4 +1,5 @@
-import com.jnowakowski.Weather;
+package com.jnowakowski.rocket.rest;
+
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTestNg;
 import org.testng.Assert;
@@ -8,7 +9,6 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Response;
 
 public class WeatherTest extends JerseyTestNg.ContainerPerClassTest {
-
     private static final String RESOURCE = "weather";
 
     @Test
@@ -22,4 +22,6 @@ public class WeatherTest extends JerseyTestNg.ContainerPerClassTest {
     protected Application configure() {
         return new ResourceConfig(Weather.class);
     }
+
+
 }

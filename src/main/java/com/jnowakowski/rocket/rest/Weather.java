@@ -1,4 +1,4 @@
-package com.jnowakowski;
+package com.jnowakowski.rocket.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
