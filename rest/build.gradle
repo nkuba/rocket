@@ -1,10 +1,11 @@
-// :rest
+// rest
 apply plugin: 'war'
 
 sourceCompatibility = 1.8
 
 dependencies {
     compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version: '2.25.1'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.25.1'
 
     testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-grizzly2', version: '2.25.1'
 }

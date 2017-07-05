@@ -26,3 +26,5 @@ subprojects {
         reports.html.enabled = false
     }
 }
+
+build.dependsOn clean
