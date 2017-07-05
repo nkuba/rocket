@@ -22,6 +22,4 @@ public class WeatherTest extends JerseyTestNg.ContainerPerClassTest {
     protected Application configure() {
         return new ResourceConfig(Weather.class);
     }
-
-
 }

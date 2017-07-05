@@ -1,3 +1,4 @@
+// :Rest
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'war'
@@ -29,5 +30,5 @@ test {
 }
 
 war {
-    archiveName "rocket.war"
+    archiveName "rest.war"
 }
