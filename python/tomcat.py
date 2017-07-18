@@ -3,6 +3,7 @@ import os
 import sys
 import subprocess
 import platform
+import shutil
 
 tomcat_home_env_name = "TOMCAT_HOME"
 
@@ -40,7 +41,15 @@ def stop():
     subprocess.call(os.path.join(tomcat_bin_dir, stop_script_name), shell=True)
 
 
-arguments_error = "Please use one of 'start|stop|restart'"
+def deploy():
+    # TODO: SWITCH TOOL TO CHEF OR DOCKER AND OTHERS
+    src = os.path.abspath(os.path.join(".", "../rest/build/libs/rest.war"))
+    dest = os.path.join(tomcat_home_dir, "webapps")
+    print("Copy {} to {}".format(src, dest))
+    shutil.copy2(src, dest)
+
+
+arguments_error = "Please use one of 'start|stop|restart|deploy'"
 
 if len(sys.argv) != 2:
     print("ERROR: Missing argument. %s" % arguments_error)
@@ -55,5 +64,7 @@ elif action == 'stop':
 elif action == 'restart':
     stop()
     start()
+elif action == 'deploy':
+    deploy()
 else:
     print("ERROR: Invalid argument '{}'. {}".format(action, arguments_error))

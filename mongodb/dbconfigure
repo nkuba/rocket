@@ -1,0 +1,3 @@
+use rocketDB
+
+db.createCollection("cookbook")

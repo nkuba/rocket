@@ -1,0 +1,76 @@
+{
+  "formatVersion": 3,
+  "id": "root",
+  "ideas": {
+    "1": {
+      "title": "VMs",
+      "id": 1,
+      "attr": {
+        "position": [
+          -306,
+          -117,
+          1
+        ]
+      },
+      "ideas": {
+        "-2": {
+          "title": "test",
+          "id": 10,
+          "ideas": {
+            "1": {
+              "title": "testing environment",
+              "id": 2,
+              "attr": {}
+            },
+            "2": {
+              "title": "database test",
+              "id": 6
+            }
+          }
+        },
+        "-12": {
+          "title": "staging",
+          "id": 11,
+          "ideas": {
+            "1": {
+              "title": "staging environment",
+              "id": 4,
+              "attr": {}
+            },
+            "2": {
+              "title": "database staging",
+              "id": 7
+            }
+          }
+        },
+        "-22": {
+          "title": "prod",
+          "id": 12,
+          "ideas": {
+            "1": {
+              "title": "production environemnt",
+              "id": 5,
+              "attr": {}
+            },
+            "2": {
+              "title": "database production",
+              "id": 8
+            }
+          }
+        }
+      }
+    },
+    "8": {
+      "title": "database production - backup",
+      "id": 9,
+      "attr": {
+        "position": [
+          1006,
+          -134,
+          1
+        ]
+      }
+    }
+  },
+  "title": "VMs"
+}

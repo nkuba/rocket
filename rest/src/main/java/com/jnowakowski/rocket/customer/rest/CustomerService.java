@@ -1,6 +1,6 @@
-package com.jnowakowski.rocket.rest;
+package com.jnowakowski.rocket.customer.rest;
 
-import com.jnowakowski.rocket.model.Customer;
+import com.jnowakowski.rocket.customer.model.Customer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

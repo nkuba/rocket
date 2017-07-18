@@ -1,4 +1,4 @@
-package com.jnowakowski.rocket.model;
+package com.jnowakowski.rocket.customer.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

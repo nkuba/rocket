@@ -1,21 +1,38 @@
 <web-app>
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>com.jnowakowski.rocket</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
     <servlet>
-        <servlet-name>Jersey Web Application</servlet-name>
+        <servlet-name>Jersey Spring Web Application</servlet-name>
         <servlet-class>
-            org.glassfish.jersey.servlet.ServletContainer
+            com.sun.jersey.spi.spring.container.servlet.SpringServlet
         </servlet-class>
         <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.jnowakowski.rocket.rest</param-value>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.jnowakowski.rocket.cookbook.rest;com.jnowakowski.rocket.customer.rest</param-value>
         </init-param>
-        <init-param>
+    <!--    <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
             <param-value>true</param-value>
-        </init-param>
+        </init-param>-->
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Jersey Web Application</servlet-name>
+        <servlet-name>Jersey Spring Web Application</servlet-name>
         <!--<url-pattern>/rest/*</url-pattern>-->
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
