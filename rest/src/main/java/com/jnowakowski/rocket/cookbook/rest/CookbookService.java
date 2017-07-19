@@ -2,11 +2,9 @@ package com.jnowakowski.rocket.cookbook.rest;
 
 import com.jnowakowski.rocket.cookbook.CookbookDAO;
 import com.jnowakowski.rocket.cookbook.model.Recipe;
-import org.mongodb.morphia.Key;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,18 +17,20 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class CookbookService {
     @Autowired
-    private CookbookDAO cookBook;
+    private CookbookDAO cookBookDAO;
 
     @GET
     public Response getCookbook() {
-        return Response.status(200).entity(cookBook.findAll()).build();
+        // return Response.status(200).entity(cookBookDAO.findAll()).build();
+        return Response.status(200).entity("OK").build();
     }
 
     @POST
     @Path("add-recipe")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addRecipe(Recipe recipe) {
-        Recipe result = cookBook.save(recipe);
-        return Response.status(201).entity("Recipe added with ID: " + result.getId()).build();
+        // Recipe result = cookBookDAO.save(recipe);
+        // return Response.status(201).entity("Recipe added with ID: " + result.getId()).build();
+        return Response.status(201).entity("Recipe added with ID: " + 111111).build();
     }
 }

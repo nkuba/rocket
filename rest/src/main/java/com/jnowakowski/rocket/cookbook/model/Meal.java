@@ -1,4 +1,4 @@
-package com.jnowakowski.rocket.customer.model;
+package com.jnowakowski.rocket.cookbook.model;
 
 /**
  * @author Jakub Nowakowski <jakub.nowakowski@amartus.com>

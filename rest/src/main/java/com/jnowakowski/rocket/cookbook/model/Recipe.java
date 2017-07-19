@@ -1,6 +1,5 @@
 package com.jnowakowski.rocket.cookbook.model;
 
-import com.jnowakowski.rocket.customer.model.Meal;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.bson.types.ObjectId;

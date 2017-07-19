@@ -5,7 +5,7 @@ import subprocess
 import platform
 import shutil
 
-tomcat_home_env_name = "TOMCAT_HOME"
+tomcat_home_env_name = "CATALINA_HOME"
 
 try:
     tomcat_home_dir = os.environ[tomcat_home_env_name]

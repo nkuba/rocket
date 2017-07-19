@@ -1,6 +1,7 @@
 package com.jnowakowski.rocket.customer.rest;
 
 import com.jnowakowski.rocket.customer.model.Customer;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -8,6 +9,7 @@ import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
 
+@Component
 @Path("customers")
 @Produces(MediaType.TEXT_PLAIN)
 public class CustomerService {

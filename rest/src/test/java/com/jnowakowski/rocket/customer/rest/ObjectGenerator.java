@@ -2,7 +2,7 @@ package com.jnowakowski.rocket.customer.rest;
 
 import com.google.gson.Gson;
 import com.jnowakowski.rocket.cookbook.model.Recipe;
-import com.jnowakowski.rocket.customer.model.Meal;
+import com.jnowakowski.rocket.cookbook.model.Meal;
 import org.glassfish.jersey.client.JerseyClient;
 import org.glassfish.jersey.client.JerseyClientBuilder;
 import org.glassfish.jersey.client.JerseyWebTarget;

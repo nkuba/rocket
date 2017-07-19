@@ -15,7 +15,7 @@ import java.util.List;
  * @author Jakub Nowakowski <jakub.nowakowski@amartus.com>
  */
 @Repository
-public abstract class CookbookDAOMongoDB implements CookbookDAO {
+public class CookbookDAOMongoDB implements CookbookDAO {
     private static final String DB_HOST = "192.168.8.22";
     private static final int DB_PORT = 27017;
     private static final String DB_NAME = "rocketDB";
@@ -26,8 +26,9 @@ public abstract class CookbookDAOMongoDB implements CookbookDAO {
         final Morphia morphia = new Morphia();
         morphia.mapPackageFromClass(Recipe.class);
 
-        datastore = morphia.createDatastore(new MongoClient(DB_HOST, DB_PORT), DB_NAME);
-        datastore.ensureIndexes();
+        datastore = null;
+        // datastore = morphia.createDatastore(new MongoClient(DB_HOST, DB_PORT), DB_NAME);
+        // datastore.ensureIndexes();
     }
 
     // @Override
