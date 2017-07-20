@@ -8,107 +8,144 @@
 	},
 	"item": [
 		{
-			"name": "customers get - valid",
-			"event": [
+			"name": "cookbook",
+			"description": "",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Body is correct\"] = responseBody === \"[{\\\"firstName\\\":\\\"Justin\\\",\\\"lastName\\\":\\\"Bron\\\",\\\"id\\\":6},{\\\"firstName\\\":\\\"An\\\",\\\"lastName\\\":\\\"Leno\\\",\\\"id\\\":2}]\";",
-							"",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{host}}:8080/rest/customers",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "customers get - invalid",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 404\"] = responseCode.code === 404;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{host}}:8080/rest/customers2",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "customers get - always fail",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Body compare is always failing\"] = responseBody === \"always failing test\";",
-							"",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{host}}:8080/rest/customers",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "customers get - valid copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Body is correct\"] = responseBody === \"Customer created with ID: 4\";",
-							"",
-							"tests[\"Status code is 201\"] = responseCode.code === 201;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{host}}:8080/rest/customers/create",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
+					"name": "cookbok delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Message is correct\"] = jsonData.message === \"Removed all Recipes\";",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:8080/rest/cookbook",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
 						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"firstName\" : \"John\",\r\n    \"lastName\" : \"Doe\"\r\n}"
+					},
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
+				{
+					"name": "cookbook get -empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body is correct\"] = responseBody === \"[]\";",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:8080/rest/cookbook",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cookbook add recipe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code match\"] = responseCode.code === 201;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"id match\"] = jsonData.id.length > 0;",
+									"tests[\"version match\"] = jsonData.version === 0;",
+									"",
+									"tests[\"name match\"] = jsonData.name === \"recipe name 001\",",
+									"tests[\"meal 1 match\"] = jsonData.meal[0] === \"DINNER\"",
+									"tests[\"meal 2 match\"] = jsonData.meal[1] === \"LUNCH\";",
+									"",
+									"tests[\"ingredients 1 match\"] = jsonData.ingredients.mieso === \"100g\";",
+									"tests[\"ingredients 2 match\"] = jsonData.ingredients.warzywa === \"400g\";",
+									"",
+									"tests[\"description match\"] = jsonData.description === \"description\";",
+									"tests[\"link match\"] = jsonData.link === \"www.kwestiasmaku.pl\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:8080/rest/cookbook/add-recipe",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"recipe name 001\",\r\n    \"meal\" : [\"DINNER\", \"LUNCH\"],\r\n    \"ingredients\" : {\r\n        \"mieso\" : \"100g\",\r\n        \"warzywa\" : \"400g\"\r\n    },\r\n    \"description\" : \"description\",\r\n    \"link\" : \"www.kwestiasmaku.pl\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "customers get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody)[0];",
+									"",
+									"tests[\"id match\"] = jsonData.id.length > 0;",
+									"tests[\"version match\"] = jsonData.version === 0;",
+									"",
+									"tests[\"name match\"] = jsonData.name === \"recipe name 001\",",
+									"tests[\"meal 1 match\"] = jsonData.meal[0] === \"DINNER\"",
+									"tests[\"meal 2 match\"] = jsonData.meal[1] === \"LUNCH\";",
+									"",
+									"tests[\"ingredients 1 match\"] = jsonData.ingredients.mieso === \"100g\";",
+									"tests[\"ingredients 2 match\"] = jsonData.ingredients.warzywa === \"400g\";",
+									"",
+									"tests[\"description match\"] = jsonData.description === \"description\";",
+									"tests[\"link match\"] = jsonData.link === \"www.kwestiasmaku.pl\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:8080/rest/cookbook",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
