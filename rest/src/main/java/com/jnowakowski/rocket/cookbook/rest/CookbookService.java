@@ -16,21 +16,20 @@ import javax.ws.rs.core.Response;
 @Path("/cookbook")
 @Produces(MediaType.APPLICATION_JSON)
 public class CookbookService {
+
     @Autowired
     private CookbookDAO cookBookDAO;
 
     @GET
     public Response getCookbook() {
-        // return Response.status(200).entity(cookBookDAO.findAll()).build();
-        return Response.status(200).entity("OK").build();
+        return Response.status(200).entity(cookBookDAO.getAll()).build();
     }
 
     @POST
     @Path("add-recipe")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addRecipe(Recipe recipe) {
-        // Recipe result = cookBookDAO.save(recipe);
-        // return Response.status(201).entity("Recipe added with ID: " + result.getId()).build();
-        return Response.status(201).entity("Recipe added with ID: " + 111111).build();
+        Recipe result = cookBookDAO.save(recipe);
+        return Response.status(201).entity("Recipe added with ID: " + result.getId()).build();
     }
 }

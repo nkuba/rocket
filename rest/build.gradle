@@ -39,9 +39,11 @@ war {
     archiveName "rest.war"
 }
 
-task deployToTomcat(type: Copy) {
-    def tomcatDir = System.getenv("TOMCAT_HOME")
-    println "TOMCAT_HOME=" + tomcatDir
+task deployLocal(type: Copy) {
+    def catalinaEnvName = "CATALINA_HOME"
+
+    def tomcatDir = System.getenv(catalinaEnvName)
+    println catalinaEnvName + "=" + tomcatDir
 
     def source = war.archivePath
     def destination = file(tomcatDir + "/webapps")
@@ -54,7 +56,7 @@ task deployToTomcat(type: Copy) {
         println "Copy *.war files from: " + source + " to: " + destination
 
         if (!tomcatDir) {
-            throw new RuntimeException("Please set environment variable: TOMCAT_HOME")
+            throw new RuntimeException("Please set environment variable: " + catalinaEnvName)
         }
 
 
