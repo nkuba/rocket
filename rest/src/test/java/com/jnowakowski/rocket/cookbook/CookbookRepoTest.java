@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class CookbookRepoTest extends AbstractTestNGSpringContextTests {
 
+    // TODO: TEST IT ON STUB DATABASE
+
     @Autowired
     MongoTemplate mongoTemplate;
 

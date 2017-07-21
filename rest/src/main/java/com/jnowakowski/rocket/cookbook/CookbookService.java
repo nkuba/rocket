@@ -12,6 +12,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import static java.lang.String.format;
+import static javax.ws.rs.core.Response.Status.*;
+
 /**
  * @author Jakub Nowakowski <jakub.nowakowski@amartus.com>
  */
@@ -22,8 +25,12 @@ import javax.ws.rs.core.Response;
 public class CookbookService {
     private static final Logger LOG = LoggerFactory.getLogger(Rocket.class);
 
-    @Autowired
     private CookbookRepo cookbookRepo;
+
+    @Autowired
+    public CookbookService(CookbookRepo cookbookRepo) {
+        this.cookbookRepo = cookbookRepo;
+    }
 
     @GET
     public Response getCookbook() {
@@ -31,29 +38,51 @@ public class CookbookService {
         return Response.ok(cookbookRepo.findAll()).build();
     }
 
-    @DELETE
-    public Response deleteAll() {
-        LOG.debug("deleteAll");
-        cookbookRepo.deleteAll();
-        return Response.ok(new Message("Removed all Recipes")).build();
+    @GET
+    @Path("/{id}")
+    public Response getRecipe(@PathParam("id") String id) {
+        LOG.debug("Get recipe with id: {}", id);
+        Recipe recipe = cookbookRepo.findOne(id);
+
+        if (recipe == null) {
+            return Response.status(NOT_FOUND).entity(new Message(format("Recipe with id: '%s' not found", id))).build();
+        } else {
+            return Response.ok(recipe).build();
+        }
     }
 
     @POST
-    @Path("add-recipe")
     public Response addRecipe(Recipe recipe) {
         LOG.debug("Add recipe {}", recipe);
         Response response;
 
         if (cookbookRepo.findByName(recipe.getName()).size() > 0) {
-            response = Response.status(Response.Status.CONFLICT)
-                               .entity(new Message(String.format("Recipe with name: '%s' already exists!", recipe.getName())))
-                               .build();
+            response = Response.status(CONFLICT).entity(new Message(format("Recipe with name: '%s' already exists!", recipe.getName()))).build();
         } else {
             Recipe result = cookbookRepo.save(recipe);
-            response = Response.status(Response.Status.CREATED).entity(result).build();
+            response = Response.status(CREATED).entity(result).build();
         }
-
-        LOG.debug("Response: " + response);
         return response;
+    }
+
+    @DELETE
+    public Response deleteAll() {
+        LOG.debug("deleteAll");
+        cookbookRepo.deleteAll();
+        return Response.ok(new Message("Removed all recipes")).build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteRecipe(@PathParam("id") String id) {
+        LOG.debug("Delete recipe with id: {}", id);
+        Recipe recipe = cookbookRepo.findOne(id);
+
+        if (recipe == null) {
+            return Response.status(NOT_FOUND).entity(new Message(format("Recipe with id: '%s' not found", id))).build();
+        } else {
+            cookbookRepo.delete(id);
+            return Response.ok(new Message(format("Removed recipe with id: %s", id))).build();
+        }
     }
 }

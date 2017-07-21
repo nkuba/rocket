@@ -8,6 +8,7 @@ sudo apt-get -y install mongodb-org
 
 echo "Configuring MongoDB..."
 sudo sed -e '/bindIp: 127.0.0.1/ s/^#*/#/' -i /etc/mongod.conf
+sudo systemctl enable mongod.service
 
 echo "Starting MongoDB..."
 sudo service mongod start
