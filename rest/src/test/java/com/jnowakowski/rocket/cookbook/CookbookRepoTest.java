@@ -1,3 +1,4 @@
+/*
 package com.jnowakowski.rocket.cookbook;
 
 import com.jnowakowski.rocket.cookbook.model.Recipe;
@@ -10,7 +11,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:testContext.xml"})
 public class CookbookRepoTest extends AbstractTestNGSpringContextTests {
 
     // TODO: TEST IT ON STUB DATABASE
@@ -44,3 +45,4 @@ public class CookbookRepoTest extends AbstractTestNGSpringContextTests {
     }
 
 }
+*/

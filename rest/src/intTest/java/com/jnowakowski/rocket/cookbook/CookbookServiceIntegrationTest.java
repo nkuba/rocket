@@ -25,7 +25,7 @@ public class CookbookServiceIntegrationTest extends JerseyTestNg.ContainerPerCla
         "{\"name\":\"recipe name 001\",\"meal\":[\"DINNER\",\"LUNCH\"],\"ingredients\":{\"mieso\":\"100g\",\"warzywa\":\"400g\"},"
             + "\"description\":\"some description\",\"link\":\"www.kwestiasmaku.pl\"}";
 
-    @Test
+    // @Test
     public void testAddRecipe() throws ParseException {
         cleanUp();
 
@@ -55,7 +55,7 @@ public class CookbookServiceIntegrationTest extends JerseyTestNg.ContainerPerCla
         validateCookbookSize(1);
     }
 
-    @Test
+    // @Test
     public void testGetByIdPositive() {
         cleanUp();
 
@@ -72,7 +72,7 @@ public class CookbookServiceIntegrationTest extends JerseyTestNg.ContainerPerCla
         Assert.assertEquals(recipeActual.toString(), recipeExpected.toString());
     }
 
-    @Test
+    // @Test
     public void testGetByIdNegative() {
         cleanUp();
         // Given
@@ -85,7 +85,7 @@ public class CookbookServiceIntegrationTest extends JerseyTestNg.ContainerPerCla
         Assert.assertEquals(responseGet.readEntity(Message.class).getMessage(), format("Recipe with id: '%s' not found", id));
     }
 
-    @Test
+    // @Test
     public void testDeleteAll() {
         cleanUp();
 
@@ -103,7 +103,7 @@ public class CookbookServiceIntegrationTest extends JerseyTestNg.ContainerPerCla
         Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
     }
 
-    @Test
+    // @Test
     public void testDeleteByIdPositive() {
         cleanUp();
 
@@ -121,7 +121,7 @@ public class CookbookServiceIntegrationTest extends JerseyTestNg.ContainerPerCla
         validateCookbookSize(0);
     }
 
-    @Test
+    // @Test
     public void testDeleteByIdNegative() {
         cleanUp();
 
@@ -135,7 +135,7 @@ public class CookbookServiceIntegrationTest extends JerseyTestNg.ContainerPerCla
         Assert.assertEquals(responseDelete.readEntity(Message.class).getMessage(), format("Recipe with id: '%s' not found", id));
     }
 
-    @Test
+    // @Test
     public void testAddRecipeDuplicateName() {
         cleanUp();
         // Given

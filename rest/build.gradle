@@ -55,3 +55,9 @@ task deployLocal(type: Copy) {
 
     }
 }
+
+idea {
+    module {
+        testSourceDirs += file('src/intTest/java')
+    }
+}
