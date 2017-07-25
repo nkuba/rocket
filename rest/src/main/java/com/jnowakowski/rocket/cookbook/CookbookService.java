@@ -15,9 +15,6 @@ import javax.ws.rs.core.Response;
 import static java.lang.String.format;
 import static javax.ws.rs.core.Response.Status.*;
 
-/**
- * @author Jakub Nowakowski <jakub.nowakowski@amartus.com>
- */
 @Component
 @Path("/cookbook")
 @Consumes(MediaType.APPLICATION_JSON)

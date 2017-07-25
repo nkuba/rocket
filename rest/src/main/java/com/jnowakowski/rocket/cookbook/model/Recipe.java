@@ -14,9 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author Jakub Nowakowski <jakub.nowakowski@amartus.com>
- */
 @Document(collection = "recipes")
 public class Recipe {
     private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";

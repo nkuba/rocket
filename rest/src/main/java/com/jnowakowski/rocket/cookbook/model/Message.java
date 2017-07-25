@@ -5,9 +5,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 
-/**
- * @author Jakub Nowakowski <jakub.nowakowski@amartus.com>
- */
 public class Message implements Serializable {
     private String message;
 

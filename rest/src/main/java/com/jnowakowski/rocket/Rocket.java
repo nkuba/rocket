@@ -4,9 +4,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * @author Jakub Nowakowski <jakub.nowakowski@amartus.com>
- */
 public class Rocket extends ResourceConfig {
     private static final Logger LOG = LoggerFactory.getLogger(Rocket.class);
 
