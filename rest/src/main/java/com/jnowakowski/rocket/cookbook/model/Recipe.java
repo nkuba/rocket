@@ -1,10 +1,14 @@
 package com.jnowakowski.rocket.cookbook.model;
 
-import com.jnowakowski.rocket.customer.model.Meal;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -13,37 +17,36 @@ import java.util.Map;
 /**
  * @author Jakub Nowakowski <jakub.nowakowski@amartus.com>
  */
-@Entity("recipes")
+@Document(collection = "recipes")
 public class Recipe {
+    private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
     @Id
     private ObjectId id;
-
     @Version
+
     private Long version;
-
-    @Indexed(options = @IndexOptions(unique = true))
+    @Indexed(unique = true)
     private String name;
+    @Field
     private List<Meal> meal;
+    @Field
     private Map<String, String> ingredients;
+    @Field
     private String description;
+    @Field
     private String link;
-
     @Indexed
-    private Date createDate;
+    @DateTimeFormat(pattern = DATE_FORMAT)
+    private Date createDate = new Date();
+    @DateTimeFormat(pattern = DATE_FORMAT)
     private Date updateDate;
 
-    public Recipe(String name, List<Meal> meal, Map<String, String> ingredients, String description, String link) {
-        this.id = ObjectId.get();
-        this.name = name;
-        this.meal = meal;
-        this.ingredients = ingredients;
-        this.description = description;
-        this.link = link;
-        this.createDate = new Date();
-        this.updateDate = createDate;
+    public Long getVersion() {
+        return version;
     }
 
-    public Recipe() {
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public List<Meal> getMeal() {
@@ -52,14 +55,6 @@ public class Recipe {
 
     public void setMeal(List<Meal> meal) {
         this.meal = meal;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Map<String, String> getIngredients() {
@@ -86,6 +81,31 @@ public class Recipe {
         this.link = link;
     }
 
+    public String getId() {
+        return id.toString();
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("id", id)
@@ -98,9 +118,5 @@ public class Recipe {
                                                                           .append("createDate", createDate)
                                                                           .append("updateDate", updateDate)
                                                                           .toString();
-    }
-
-    public ObjectId getId() {
-        return id;
     }
 }
