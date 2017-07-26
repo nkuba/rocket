@@ -1,0 +1,10 @@
+---
+- hosts: web
+  remote_user: root
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: ensure tomcat8 is latest
+    apt:
+      name: tomcat8
+      state: latest
