@@ -1,6 +1,29 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
+var port = process.env.PORT || 3000;
+
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient
+var url = "mongodb://192.168.9.22:27017/rocketDB";
+var tableName = "recipes"
+
+// Create DB
+MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+
+    db.createCollection(table, function(err, res) {
+        if (err) throw err;
+        console.log("Table created: " + tableName);
+        db.close();
+  });
+});
+
+// Connect to the db
+MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
+  if(!err) { console.log("We are connected"); }
+
+});
 
 app.get('/listUsers', function (req, res) {
    fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
@@ -28,11 +51,6 @@ app.post('/addUser', function (req, res) {
    });
 })
 
-var server = app.listen(8080, function () {
+var server = app.listen(port)
 
-  var host = server.address().address
-  var port = server.address().port
-
-  console.log("Example app listening at http://%s:%s", host, port)
-
-})
+console.log('todo list RESTful API server started on: ' + port);
