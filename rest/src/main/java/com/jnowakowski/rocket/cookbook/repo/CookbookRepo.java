@@ -1,4 +1,4 @@
-package com.jnowakowski.rocket.cookbook;
+package com.jnowakowski.rocket.cookbook.repo;
 
 import com.jnowakowski.rocket.cookbook.model.Recipe;
 import org.springframework.data.mongodb.repository.MongoRepository;
