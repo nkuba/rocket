@@ -35,6 +35,7 @@
 #      tomcat_version: {{tomcat_version}}
 
 - hosts: db
+  become: true
   vars:
     mongodb_conf_port: 27017
   roles:
