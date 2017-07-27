@@ -2,13 +2,15 @@
 - hosts: web
   become: true
   vars:
-    tomcatPackage: tomcat8
-  tasks:
-    - name: Update apt-cache
-      apt: update_cache=yes
-
-    - name: Install tomcat
-      apt: name={{tomcatPackage}} state=latest
+    oracle_java_version: 8
+    tomcat_version: "8.5.12"
+#    tomcatPackage: tomcat8
+#  tasks:
+#    - name: Update apt-cache
+#      apt: update_cache=yes
+#
+#    - name: Install tomcat
+#      apt: name={{tomcatPackage}} state=latest
 
 #    - name: Install packages
 #      apt: name={{item}} state={{tomcatVersion}}
@@ -18,10 +20,23 @@
 #    - name: Deploy artifacts
 #      command: /sbin/shutdown -t now
 #      notify: restart tomcat
+
   handlers:
     - name: restart tomcat
       service: name={{tomcatPackage}} state=restarted
+
   roles:
     - role: ansiblebit.oracle-java,
-      oracle_java_version: 8
+#      oracle_java_version: {{oracle_java_version}}
       oracle_java_set_as_default: yes
+
+    - role: ChristopherDavenport.universal-tomcat
+      become: yes
+#      tomcat_version: {{tomcat_version}}
+
+- hosts: db
+  vars:
+    mongodb_conf_port: 27017
+  roles:
+    - role: Stouts.mongodb
+      mongodb_conf_bind_ip: 192.168.9.21
