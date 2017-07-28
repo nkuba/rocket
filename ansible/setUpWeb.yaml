@@ -1,0 +1,21 @@
+---
+- hosts: web
+  become: true
+  vars:
+    oracle_java_version: 8
+    tomcatPackage: "tomcat8"
+
+  tasks:
+  - name: Update apt-cache
+    apt: update_cache=yes
+
+  - name: Install tomcat
+    apt: name={{tomcatPackage}} state=latest
+
+  handlers:
+    - name: restart tomcat
+      service: name={{tomcatPackage}} state=restarted
+
+  roles:
+    - role: ansiblebit.oracle-java
+      oracle_java_set_as_default: yes
