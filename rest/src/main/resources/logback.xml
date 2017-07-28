@@ -9,7 +9,7 @@
     </appender>
 
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/opt/tomcat/latest/logs/rocket-debug.log</file>
+        <file>logs/rocket-debug.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 %d{yyyy-MM-dd HH:mm:ss} %-5level %msg%n
