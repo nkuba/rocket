@@ -20,7 +20,7 @@
 								"type": "text/javascript",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"Message is correct\"] = jsonData.message === \"Removed all Recipes\";",
+									"tests[\"Message is correct\"] = jsonData.message === \"Removed all recipes\";",
 									"",
 									"tests[\"Status code is 200\"] = responseCode.code === 200;",
 									"",
@@ -85,13 +85,16 @@
 									"tests[\"ingredients 2 match\"] = jsonData.ingredients.warzywa === \"400g\";",
 									"",
 									"tests[\"description match\"] = jsonData.description === \"description\";",
-									"tests[\"link match\"] = jsonData.link === \"www.kwestiasmaku.pl\";"
+									"tests[\"link match\"] = jsonData.link === \"www.kwestiasmaku.pl\";",
+									"",
+									"postman.setEnvironmentVariable(\"recipeId\", jsonData.id);",
+									"postman.setEnvironmentVariable(\"recipeBody\", responseBody);"
 								]
 							}
 						}
 					],
 					"request": {
-						"url": "{{host}}:8080/rest/cookbook/add-recipe",
+						"url": "{{host}}:8080/rest/cookbook",
 						"method": "POST",
 						"header": [
 							{
@@ -109,7 +112,7 @@
 					"response": []
 				},
 				{
-					"name": "customers get",
+					"name": "cookbook get",
 					"event": [
 						{
 							"listen": "test",
@@ -118,20 +121,79 @@
 								"exec": [
 									"tests[\"Status code is 200\"] = responseCode.code === 200;",
 									"",
-									"var jsonData = JSON.parse(responseBody)[0];",
+									"tests[\"Body matches string\"] = responseBody.has(postman.getEnvironmentVariable(\"recipeBody\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:8080/rest/cookbook",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "recipe get by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
 									"",
-									"tests[\"id match\"] = jsonData.id.length > 0;",
-									"tests[\"version match\"] = jsonData.version === 0;",
+									"tests[\"Body matches string\"] = responseBody.has(postman.getEnvironmentVariable(\"recipeBody\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:8080/rest/cookbook/{{recipeId}}",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "recipe delete by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
 									"",
-									"tests[\"name match\"] = jsonData.name === \"recipe name 001\",",
-									"tests[\"meal 1 match\"] = jsonData.meal[0] === \"DINNER\"",
-									"tests[\"meal 2 match\"] = jsonData.meal[1] === \"LUNCH\";",
+									"tests[\"Body matches string\"] = responseBody.has(\"Removed recipe with id: \" + postman.getEnvironmentVariable(\"recipeId\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:8080/rest/cookbook/{{recipeId}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cookbook get -empty copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body is correct\"] = responseBody === \"[]\";",
 									"",
-									"tests[\"ingredients 1 match\"] = jsonData.ingredients.mieso === \"100g\";",
-									"tests[\"ingredients 2 match\"] = jsonData.ingredients.warzywa === \"400g\";",
-									"",
-									"tests[\"description match\"] = jsonData.description === \"description\";",
-									"tests[\"link match\"] = jsonData.link === \"www.kwestiasmaku.pl\";"
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
 								]
 							}
 						}
