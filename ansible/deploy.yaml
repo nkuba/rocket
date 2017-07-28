@@ -1,0 +1,14 @@
+---
+- hosts: web
+  vars:
+    source_url: http://192.168.8.10:8080/job/build/lastSuccessfulBuild/artifact/rest/build/libs/rest.war
+    destination_path: /var/lib/tomcat8/webapps/.
+
+  tasks:
+  - name: download artifact
+    become: yes
+    become_user: tomcat8
+    get_url:
+      url: "{{ source_url }}"
+      dest: "{{ destination_path }}"
+      mode: 0644

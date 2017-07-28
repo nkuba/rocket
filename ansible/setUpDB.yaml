@@ -1,0 +1,20 @@
+---
+- hosts: db
+  become: true
+
+  tasks:
+    - name: Update apt-cache
+      apt: update_cache=yes
+
+    - name: Install MongoDB
+      apt: name=mongodb state=latest
+
+    - name: Set MongoDB bind_ip
+      replace:
+        path: /etc/mongodb.conf
+        regexp: "^bind_ip = 127.0.0.1"
+        replace: "#bind_ip = 127.0.0.1"
+        backup:  yes
+
+    - name: MongoDB restarted
+      service: name=mongodb state=restarted enabled=yes

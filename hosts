@@ -1,0 +1,6 @@
+# Rocket environments hosts
+192.168.8.10  jenkins.rocket.local
+192.168.9.21  tst.web.rocket.local
+192.168.9.22  tst.db.rocket.local
+192.168.9.31  stg.web.rocket.local
+192.168.9.32  stg.db.rocket.local
