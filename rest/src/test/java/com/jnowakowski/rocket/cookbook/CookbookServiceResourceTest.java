@@ -2,6 +2,8 @@ package com.jnowakowski.rocket.cookbook;
 
 import com.jnowakowski.rocket.cookbook.model.Message;
 import com.jnowakowski.rocket.cookbook.model.Recipe;
+import com.jnowakowski.rocket.cookbook.repo.CookbookRepo;
+import com.jnowakowski.rocket.cookbook.rest.CookbookService;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTestNg;

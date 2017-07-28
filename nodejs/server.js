@@ -1,38 +1,24 @@
-var express = require('express');
-var app = express();
-var fs = require("fs");
+var express     =   require('express');
+var app         =   express();
+var bodyParser  =   require("body-parser");
+var router      =   express.Router();
+var port        =   3001;
 
-app.get('/listUsers', function (req, res) {
-   fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-       console.log( data );
-       res.json(JSON.parse(data));
-   });
-})
+//  https://codeforgeek.com/2015/08/restful-api-node-mongodb/
 
-var user = {
-   "user4" : {
-      "name" : "mohit",
-      "password" : "password4",
-      "profession" : "teacher",
-      "id": 4
-   }
-}
+var mongoose    =   require("mongoose");
+mongoose.connect('mongodb://192.168.9.22:27017/rocketDB');
 
-app.post('/addUser', function (req, res) {
-   // First read existing users.
-   fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-       data = JSON.parse( data );
-       data["user4"] = user["user4"];
-       console.log( data );
-       res.json(data);
-   });
-})
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({"extended" : false}));
 
-var server = app.listen(8080, function () {
+router.get("/",function(req,res){
+    res.json({"error" : false,"message" : "Hello World"});
+});
 
-  var host = server.address().address
-  var port = server.address().port
 
-  console.log("Example app listening at http://%s:%s", host, port)
+app.use('/',router);
 
-})
+var server = app.listen(port)
+
+console.log('RESTful API server started on: ' + port);

@@ -1,12 +1,14 @@
-package com.jnowakowski.rocket.cookbook;
+package com.jnowakowski.rocket.cookbook.rest;
 
 import com.jnowakowski.rocket.Rocket;
 import com.jnowakowski.rocket.cookbook.model.Message;
 import com.jnowakowski.rocket.cookbook.model.Recipe;
+import com.jnowakowski.rocket.cookbook.repo.CookbookRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -49,6 +51,7 @@ public class CookbookService {
     }
 
     @POST
+    @Transactional
     public Response addRecipe(Recipe recipe) {
         LOG.debug("Add recipe {}", recipe);
         Response response;
