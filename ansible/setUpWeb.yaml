@@ -1,6 +1,7 @@
 ---
 - hosts: web
   become: true
+
   vars:
     oracle_java_version: 8
     tomcatPackage: "tomcat8"

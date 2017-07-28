@@ -62,8 +62,6 @@ task deployLocal(type: Copy) {
         if (!tomcatDir) {
             throw new RuntimeException("Please set environment variable: " + catalinaEnvName)
         }
-
-
     }
 }
 
