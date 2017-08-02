@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "cookbook",
+			"name": "cookbook - positive",
 			"description": "",
 			"item": [
 				{
@@ -30,7 +30,7 @@
 						}
 					],
 					"request": {
-						"url": "{{host}}:8080/rest/cookbook",
+						"url": "{{host}}:{{port}}/rest/cookbook",
 						"method": "DELETE",
 						"header": [],
 						"body": {},
@@ -54,7 +54,7 @@
 						}
 					],
 					"request": {
-						"url": "{{host}}:8080/rest/cookbook",
+						"url": "{{host}}:{{port}}/rest/cookbook",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -94,7 +94,7 @@
 						}
 					],
 					"request": {
-						"url": "{{host}}:8080/rest/cookbook",
+						"url": "{{host}}:{{port}}/rest/cookbook",
 						"method": "POST",
 						"header": [
 							{
@@ -127,7 +127,7 @@
 						}
 					],
 					"request": {
-						"url": "{{host}}:8080/rest/cookbook",
+						"url": "{{host}}:{{port}}/rest/cookbook",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -151,7 +151,7 @@
 						}
 					],
 					"request": {
-						"url": "{{host}}:8080/rest/cookbook/{{recipeId}}",
+						"url": "{{host}}:{{port}}/rest/cookbook/{{recipeId}}",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -175,7 +175,7 @@
 						}
 					],
 					"request": {
-						"url": "{{host}}:8080/rest/cookbook/{{recipeId}}",
+						"url": "{{host}}:{{port}}/rest/cookbook/{{recipeId}}",
 						"method": "DELETE",
 						"header": [],
 						"body": {},
@@ -199,8 +199,89 @@
 						}
 					],
 					"request": {
-						"url": "{{host}}:8080/rest/cookbook",
+						"url": "{{host}}:{{port}}/rest/cookbook",
 						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cookbook - negative",
+			"description": "",
+			"item": [
+				{
+					"name": "cookbok delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Message is correct\"] = jsonData.message === \"Removed all recipes\";",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:{{port}}/rest/cookbook",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "recipe get by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;",
+									"",
+									"tests[\"Body matches string\"] = responseBody.has(\"Recipe with id: 5981e28dfba4785914a19529 not found\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:{{port}}/rest/cookbook/5981e28dfba4785914a19529",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "recipe delete by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;",
+									"",
+									"tests[\"Body matches string\"] = responseBody.has(\"Recipe with id: 5981e28dfba4785914a19529 not found\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{host}}:{{port}}/rest/cookbook/5981e28dfba4785914a19529",
+						"method": "DELETE",
 						"header": [],
 						"body": {},
 						"description": ""
