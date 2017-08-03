@@ -6,13 +6,15 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "mongoose": "^4.11.4"
+    "mongoose": "^4.11.5"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "mockgoose": "^7.3.3",
+    "supertest": "^3.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha spec",
     "start": "nodemon Server.js"
   },
   "author": "",
