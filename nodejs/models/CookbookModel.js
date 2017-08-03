@@ -1,7 +1,12 @@
-var mongoose  =   require("mongoose");
-var Schema    =   mongoose.Schema;
+var properties  =   require("../conf/Properties");
+var Mongoose    =   require("mongoose");
+var Schema      =   Mongoose.Schema;
 
-mongoose.connect('mongodb://192.168.9.22:27017/rocketDB');
+var dbHost  =   properties.get('db.host');
+var dbPort  =   properties.get('db.port');
+var dbName  =   properties.get('db.name');
+
+Mongoose.connect("mongodb://" + dbHost + ":" + dbPort + "/" + dbName);
 
 var recipeSchema  = Schema({
     _id : { type: Schema.Types.ObjectId, unique: true, required: true, auto: true},
@@ -28,4 +33,4 @@ recipeSchema.set('toJSON', {
   }
 });
 
-module.exports = mongoose.model('recipes', recipeSchema);
+module.exports = Mongoose.model('recipes', recipeSchema);
