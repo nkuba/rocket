@@ -7,14 +7,16 @@
 *.war
 *.log
 
-rest/out/
-rest.build/
-rest/logs/
+out/
+build/
+logs/
 
 .vagrant/
 vagrant/.vagrant
 
 ansible/*.retry
+
+.chef
 
 nodejs/node_modules/
 nodejs/package-lock.json

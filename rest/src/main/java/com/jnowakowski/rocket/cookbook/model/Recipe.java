@@ -20,7 +20,6 @@ public class Recipe {
     @Id
     private ObjectId id;
     @Version
-
     private Long version;
     @Indexed(unique = true)
     private String name;
