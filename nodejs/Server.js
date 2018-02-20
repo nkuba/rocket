@@ -1,26 +1,25 @@
-var express             = require('express');
-var app                 = express();
-var bodyParser          = require("body-parser");
-var router              = express.Router();
-var cookbookController  = require("./controllers/CookbookController");
-var port                = 3001;
+var Express             =   require('express');
+var app                 =   Express();
+var Router              =   Express.Router();
+var BodyParser          =   require("body-parser");
+var CookbookController  =   require("./controllers/CookbookController");
+var Properties          =   require("./conf/Properties");
+var port                =   Properties.get("main.port");
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  "extended": false
-}));
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({"extended": false}));
 
-router.route("/")
-  .get(cookbookController.getCookbook)
-  .delete(cookbookController.deleteCookbook)
-  .post(cookbookController.postRecipe);
+Router.route("/")
+  .get(CookbookController.getCookbook)
+  .delete(CookbookController.deleteCookbook)
+  .post(CookbookController.postRecipe);
 
-router.route("/:id")
-  .get(cookbookController.getRecipe)
-  .delete(cookbookController.deleteRecipe);
+Router.route("/:id")
+  .get(CookbookController.getRecipe)
+  .delete(CookbookController.deleteRecipe);
 
-app.use('/rest/cookbook', router);
+app.use('/rest/cookbook', Router);
 
 app.listen(port)
 
-console.log('RESTful API server started on: ' + port);
+console.log('ROCKET API server started on port: ' + port);
